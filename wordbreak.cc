@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// res[i]保存从0到i能否匹配
 class Solution{
 public:
 	bool wordBreak(string s, unordered_set<string> &dict){
@@ -22,6 +23,26 @@ public:
 		return res[s.length()];
 	}
 };
+
+class Solution1{
+	
+public:
+	bool wordBreak(string s, unordered_set<string> &dict){
+		if(s.length() == 0)
+			return true;
+		vector<vector<bool> >res(s.length()+1 , vector<bool>(s.length()+1, false);
+		
+		for(int i=1; i<=s.length(); i++){
+			for(int j=0; j<i; j++){
+				if(res[j] && dict.find(s.substr(j, i-j)) != dict.end() ){
+						res[i]=true; 
+				}
+			}
+		}
+	}
+};
+
+
 
 int main(){
 	string str="leetcode";
