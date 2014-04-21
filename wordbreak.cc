@@ -24,6 +24,9 @@ public:
 	}
 };
 
+
+//从长度为1开始计算，dp[i][j]表示从j 开始长度为i的串是否能构成，预计复杂度O（N^3）
+/*
 class Solution1{
 	
 public:
@@ -41,7 +44,7 @@ public:
 		}
 	}
 };
-
+*/
 
 
 int main(){
