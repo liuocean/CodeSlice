@@ -1,0 +1,84 @@
+# version 1.0
+
+#hello: file1.o file2.o
+#	gcc file1.o file2.o -o hello
+
+#file1.o:file1.c
+#	gcc -c file1.c 
+
+#file2.o:file2.c
+#	gcc -c file2.c
+
+#clean:
+#	rm *.o
+
+################@@@@@@@@@@@@@@@@############################
+
+#version 2.0
+
+#CC=gcc
+#XX=g++
+#CFLAGS=-Wall -O
+#OBJS=file1.o file2.o
+
+#hello:$(OBJS)
+#	$(CC) $(OBJS) -o hello #can be $@
+
+#file1.o:file1.c
+#	$(CC) $(CFLAGS) -c file1.c   #can be $<
+#file2.o:file2.c
+#	$(CC) $(CFLAGS) -c file2.c   #can be $<
+
+#clean:
+#	rm *.o
+
+################@@@@@@@@@@@@@@@@############################
+
+#version 3.0
+
+#CC=gcc
+#XX=g++
+#CFLAGS=-Wall -O
+#OBJS=file1.o file2.o
+# $@ 扩展成当前规则的目的文件名， $< 扩展成依靠列表中的第一个依靠文件，而 # $^ 扩展成整个依靠的列表（除掉了里面所有重 复的文件名)
+#hello:$(OBJS)
+#	$(CC) $(OBJS) -o $@
+
+#%.o:%.c
+#	$(CC) $(CFLAGS) -c $< -o $@
+#%.o:%.cpp
+#	$(XX) $(CFLAGS) -c $< -o $@
+#clean:
+#	rm *.o
+
+
+################@@@@@@@@@@@@@@@@############################
+
+#version 4.0
+
+CC=gcc
+XX=g++
+CFLAGS=-Wall -O
+
+SOURCES=$(wildcard *.c *.cpp)
+OBJS=$(patsubst %.c, %.o, $(SOURCES))
+
+hello:$(OBJS)
+	$(CC) $(OBJS) -o $@
+
+%.o:%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+%.o:%.cpp
+	$(XX) $(CFLAGS) -c $< -o $@
+
+# 可以写成下面这样，静态模式,但是对应.o文件好像没法区分，应该查找.c 还是.cpp 文件，下面有错，因为每个.o被替换了两次
+#$(OBJS): %.o:%.c
+#	$(CC) $(CFLAGS) -c $< -o $@
+#$(OBJS): %.o:%.cpp
+#	$(XX) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm *.o
+
+
+
