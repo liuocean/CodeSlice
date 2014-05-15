@@ -106,13 +106,16 @@ bool search(trie_t *ptrie, char *key){
 void get_fuzzy_distance(trie_node_t *root, int &max){
 	if(!root){
 		max=0;
-		return 0;
+		return ;
 	}
 	int temp=0;
 	if(root->children[0] && root->children[1]){
 		temp=root->children[0]->value + root->children[1]->value ; //		
 	}
-	else temp=root->children[0] ? root->children[0]->value : root->children[1]->value;
+	else if(root->children[0]) 
+		temp=root->children[0]->value;
+	else if(root->children[1])
+		temp=root->children[1]->value;
 	
 	if(temp > max)
 		max =temp;

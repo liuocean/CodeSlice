@@ -13,7 +13,7 @@ char * delete_k_digits_v(char *str, int k);
 
 
 int main(){
-	char str[]="1335";
+	char str[]="342";
 	int k=1;
 	char *p=delete_k_digits(str, k);
 	printf("%s\n", p);
@@ -29,8 +29,9 @@ char *delete_k_digits(char *str, int k){
 	int len=strlen(str);
 	if(len <= k)
 		return NULL;
-	int i=0;
+	int i;
 	while(k>0){
+		i=0;
 		while(i<len-1 && str[i] <= str[i+1]) //注意，这里必须算<= ,考虑1335 k=1
 			i++;
 		for(int j=i; j<len; j++)
