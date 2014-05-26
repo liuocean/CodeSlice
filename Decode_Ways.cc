@@ -61,6 +61,8 @@ int Solution::numDecodings_recursive_memo(unordered_map<string, int>&hashmap, st
 
 //动态规划, dp[i]表示从i到最后的种数
 int Solution::numDecodings_dp(string s){
+	if(s.length() == 0)
+		return 0;
 	int dp[s.length()];
 	dp[s.length()-1]=1;
 	for(int i=s.length()-2; i>=0; --i){
