@@ -59,8 +59,23 @@ int Solution::numDecodings_recursive_memo(unordered_map<string, int>&hashmap, st
 	return num;
 }
 
+//动态规划, dp[i]表示从i到最后的种数
+int Solution::numDecodings_dp(string s){
+	int dp[s.length()];
+	dp[s.length()-1]=1;
+	for(int i=s.length()-2; i>=0; --i){
+		dp[i]=dp[i + 1];
+		string temp=s.substr(i,2);
+		if(temp.compare("26") <= 0){
+			dp[i] += dp[i + 2];
+		}
+	}
+
+	return dp[0];
+}
+
 int main(){
-	string s="128";
+	string s="1238";
 
 	Solution solution;
 	int num=solution.numDecodings_recursive(s);
@@ -68,6 +83,9 @@ int main(){
 	
 	unordered_map<string, int>hashmap;
 	num=solution.numDecodings_recursive_memo(hashmap, s);
+	cout<<num<<endl;
+	
+	num=solution.numDecodings_dp(s);
 	cout<<num<<endl;
 
 	return 0;
