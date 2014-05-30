@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include<vector>
 using namespace std;
 
 class Solution {
@@ -15,7 +15,7 @@ int Solution::leftBorder(int A[], int n, int target){
         return -1;
     int low=0, high=n-1;
     while(low < high){
-       int mid=low + (high -low) >> 1; 
+       int mid=low + ((high -low) >> 1); 
        if(A[mid]==target) 
             if(mid==0 || A[mid-1]!=target)
               return mid;
@@ -33,7 +33,7 @@ int Solution::rightBorder(int A[], int n, int target){
         return -1;
     int low=0, high=n-1;
     while(low < high){
-       int mid=low + (high -low) >> 1; 
+       int mid=low + ((high -low) >> 1); 
        if(A[mid]==target) 
             if(mid==high || A[mid+1]!=target)
               return mid;
