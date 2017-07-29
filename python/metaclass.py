@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 Person = type('Person', (object,), {'name':'baby', 'age':20})
 print type(Person())
 
